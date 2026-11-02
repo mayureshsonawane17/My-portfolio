@@ -1,0 +1,793 @@
+/* A dark background and bright lime create the main visual theme. */
+:root {
+  color-scheme: dark;
+  --night: #10110f;
+  --night-soft: #171916;
+  --paper: #f2f1e9;
+  --muted: #a4a69e;
+  --lime: #d7ff3f;
+  --line: rgb(242 241 233 / 16%);
+}
+
+/* These basics make sizing consistent and scrolling feel smooth. */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--paper);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+}
+
+/* The header floats above the page content. */
+.site-header {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 50%;
+  display: flex;
+  width: min(100% - 88px, 1320px);
+  height: 94px;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateX(-50%);
+}
+
+.brand {
+  color: var(--paper);
+  font-size: 1.65rem;
+  font-weight: 800;
+  letter-spacing: -0.08em;
+  text-decoration: none;
+}
+
+.brand span,
+.lime-dot {
+  color: var(--lime);
+}
+
+.site-header nav {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.site-header nav a {
+  color: #d0d1cb;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.site-header nav a:hover,
+.site-header nav a:focus-visible {
+  color: var(--lime);
+}
+
+.site-header nav .nav-contact {
+  padding: 10px 15px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+/* The hero combines oversized text with a glowing abstract orb. */
+.hero {
+  position: relative;
+  display: grid;
+  min-height: min(850px, 100svh);
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  overflow: hidden;
+  padding: 125px max(44px, calc((100vw - 1320px) / 2)) 105px;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 68% 48%, rgb(91 107 52 / 18%), transparent 37%),
+    radial-gradient(ellipse at 50% 5%, rgb(255 255 255 / 5%), transparent 40%),
+    var(--night);
+}
+
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image: radial-gradient(rgb(255 255 255 / 42%) 0.7px, transparent 0.9px);
+  background-position: center;
+  background-size: 23px 23px;
+  content: "";
+  mask-image: radial-gradient(ellipse at 70% 42%, #000 0%, transparent 58%);
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  padding-bottom: 25px;
+}
+
+.eyebrow,
+.section-label {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 25px;
+  color: #c5c6bf;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 16px rgb(215 255 63 / 75%);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(4.5rem, 9.5vw, 9.2rem);
+  font-weight: 700;
+  letter-spacing: -0.09em;
+  line-height: 0.82;
+}
+
+.hero h1 span,
+.about h2 span,
+.skills h2 span,
+.contact h2 span {
+  color: var(--lime);
+}
+
+.hero-intro {
+  max-width: 380px;
+  margin: 30px 0 25px;
+  color: #b6b8b0;
+  font-size: 1rem;
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  color: var(--paper);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.text-link span {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--lime);
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.text-link:hover span {
+  background: var(--lime);
+  color: var(--night);
+}
+
+/* The glowing ball and rings are drawn with CSS gradients, not images. */
+.orb-scene {
+  position: relative;
+  display: grid;
+  width: min(100%, 620px);
+  aspect-ratio: 1;
+  align-self: center;
+  justify-self: center;
+  place-items: center;
+  transform: translate(2%, -2%);
+}
+
+.orb {
+  position: relative;
+  z-index: 1;
+  width: 53%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 30% 25%, rgb(255 255 255 / 85%) 0 1%, transparent 13%),
+    radial-gradient(ellipse at 35% 31%, #e8ffad 0%, #b8e22e 19%, #668025 43%, #27331c 66%, #151914 79%);
+  box-shadow:
+    inset -28px -24px 48px rgb(0 0 0 / 65%),
+    inset 12px 10px 28px rgb(255 255 255 / 24%),
+    0 0 55px rgb(188 229 58 / 20%),
+    0 0 150px rgb(188 229 58 / 14%);
+}
+
+.orb::after {
+  position: absolute;
+  inset: 7%;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 50%;
+  content: "";
+}
+
+.orbit {
+  position: absolute;
+  width: 87%;
+  height: 37%;
+  border: 1px solid rgb(240 245 223 / 35%);
+  border-radius: 50%;
+  transform: rotate(-31deg);
+}
+
+.orbit-one {
+  box-shadow: 0 0 16px rgb(255 255 255 / 6%);
+}
+
+.orbit-two {
+  width: 94%;
+  height: 56%;
+  border-color: rgb(240 245 223 / 13%);
+  transform: rotate(39deg);
+}
+
+.orb-caption {
+  position: absolute;
+  z-index: 2;
+  right: 3%;
+  bottom: 17%;
+  color: rgb(242 241 233 / 72%);
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  line-height: 1.6;
+}
+
+.hero-bottom {
+  position: absolute;
+  right: max(44px, calc((100vw - 1320px) / 2));
+  bottom: 27px;
+  left: max(44px, calc((100vw - 1320px) / 2));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #92958b;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+.hero-bottom a {
+  color: var(--paper);
+  text-decoration: none;
+}
+
+.hero-bottom a span {
+  padding-left: 7px;
+  color: var(--lime);
+}
+
+/* This shared layout aligns the sections and their small number labels. */
+.section-wrap {
+  width: min(100% - 88px, 1120px);
+  margin: 0 auto;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.section-label span {
+  color: var(--lime);
+}
+
+/* The about section uses large type like an editorial spread. */
+.about {
+  position: relative;
+  display: grid;
+  min-height: 490px;
+  grid-template-columns: 0.8fr 1.2fr;
+  align-items: start;
+  padding-top: 116px;
+  border-top: 1px solid var(--line);
+}
+
+.about-copy {
+  max-width: 660px;
+}
+
+.about h2,
+.skills h2,
+.contact h2 {
+  margin: -18px 0 25px;
+  font-size: clamp(3.2rem, 7vw, 6.7rem);
+  letter-spacing: -0.08em;
+  line-height: 0.95;
+}
+
+.about-copy p {
+  max-width: 440px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.about-stamp {
+  position: absolute;
+  right: 1%;
+  bottom: 50px;
+  color: #74776d;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  line-height: 1.6;
+  transform: rotate(-12deg);
+}
+
+.about-stamp span {
+  display: block;
+  color: var(--lime);
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+/* The skills list makes your interests feel like a neat index. */
+.skills {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  padding: 85px 0 110px;
+  border-top: 1px solid var(--line);
+}
+
+.skills h2 {
+  margin-top: 0;
+  margin-bottom: 40px;
+  font-size: clamp(3rem, 6vw, 5.3rem);
+}
+
+.skill-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skill-list li {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  padding: 17px 0;
+  border-top: 1px solid var(--line);
+  font-size: 1.15rem;
+}
+
+.skill-list li:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.skill-list li span {
+  color: var(--lime);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+}
+
+/* The project pairs a dark atmospheric illustration with its description. */
+.projects {
+  padding: 78px 0 110px;
+  border-top: 1px solid var(--line);
+}
+
+.project-card {
+  display: grid;
+  min-height: 470px;
+  grid-template-columns: 1.1fr 0.9fr;
+  margin-top: 35px;
+  overflow: hidden;
+  background: var(--night-soft);
+}
+
+.project-art {
+  position: relative;
+  min-height: 450px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 74%, rgb(176 216 55 / 28%), transparent 29%),
+    radial-gradient(ellipse at 50% 75%, rgb(120 108 54 / 22%), transparent 49%),
+    linear-gradient(160deg, #242720 0%, #10120f 65%);
+}
+
+.project-art::before {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgb(237 239 223 / 48%) 0.8px, transparent 1px);
+  background-size: 19px 19px;
+  content: "";
+  mask-image: linear-gradient(transparent, #000 30%, transparent 90%);
+}
+
+.project-moon {
+  position: absolute;
+  top: 14%;
+  left: 50%;
+  width: 28%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f6f7df, #d5ef75 35%, #829942 72%);
+  box-shadow: 0 0 55px rgb(215 255 63 / 30%);
+  transform: translateX(-50%);
+}
+
+.project-horizon {
+  position: absolute;
+  right: -15%;
+  bottom: -34%;
+  left: -15%;
+  height: 71%;
+  border: 1px solid rgb(215 255 63 / 42%);
+  border-radius: 50% 50% 0 0;
+  background: linear-gradient(160deg, #363b23, #10120f 68%);
+  box-shadow: 0 -18px 65px rgb(215 255 63 / 10%);
+  transform: rotate(-8deg);
+}
+
+.project-art-label,
+.project-index {
+  position: absolute;
+  z-index: 1;
+  color: rgb(242 241 233 / 73%);
+  font-size: 0.57rem;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  line-height: 1.7;
+}
+
+.project-art-label {
+  top: 10%;
+  left: 9%;
+}
+
+.project-index {
+  right: 9%;
+  bottom: 8%;
+}
+
+.project-info {
+  align-self: center;
+  padding: 54px clamp(28px, 5vw, 70px);
+}
+
+.project-info .eyebrow {
+  margin: 0 0 20px;
+  color: var(--lime);
+}
+
+.project-info h2 {
+  margin: 0;
+  font-size: clamp(3.8rem, 7vw, 6.7rem);
+  letter-spacing: -0.09em;
+  line-height: 0.84;
+}
+
+.project-info > p:not(.eyebrow) {
+  max-width: 330px;
+  margin: 26px 0;
+  color: var(--muted);
+}
+
+.project-tag {
+  display: inline-block;
+  padding: 8px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: #d1d2c9;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+/* The contact section reverses the colors to finish on a bright note. */
+.contact {
+  position: relative;
+  display: grid;
+  min-height: 490px;
+  grid-template-columns: 0.8fr 1.2fr;
+  padding: 87px 0 94px;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+}
+
+.contact::before {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  width: 320px;
+  aspect-ratio: 1;
+  border: 1px solid rgb(215 255 63 / 18%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 36px rgb(215 255 63 / 3%), 0 0 0 72px rgb(215 255 63 / 2%);
+  content: "";
+  transform: translateY(-50%);
+}
+
+.contact .eyebrow {
+  margin: 0 0 25px;
+}
+
+.contact h2 {
+  margin: 0;
+  font-size: clamp(3.2rem, 6.5vw, 6.4rem);
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 35px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--lime);
+  color: var(--lime);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.contact-link strong {
+  color: var(--paper);
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.contact-spark {
+  position: absolute;
+  top: 45%;
+  right: 16%;
+  color: var(--lime);
+  font-size: 3.5rem;
+  transform: rotate(15deg);
+}
+
+.site-footer {
+  display: flex;
+  min-height: 90px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px max(44px, calc((100vw - 1320px) / 2));
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.site-footer > a:last-child {
+  color: var(--paper);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+}
+
+.text-link:focus-visible,
+.contact-link:focus-visible,
+.site-header a:focus-visible,
+.hero-bottom a:focus-visible,
+.site-footer a:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 5px;
+}
+
+/* On phones, the artwork and sections stack to fit a narrow screen. */
+@media (max-width: 760px) {
+  .site-header {
+    width: calc(100% - 40px);
+    height: 76px;
+  }
+
+  .site-header nav {
+    gap: 16px;
+  }
+
+  .site-header nav a {
+    font-size: 0.76rem;
+  }
+
+  .site-header nav .nav-contact {
+    padding: 7px 10px;
+  }
+
+  .hero {
+    min-height: 790px;
+    grid-template-columns: 1fr;
+    align-content: center;
+    padding: 115px 28px 95px;
+  }
+
+  .hero-copy {
+    align-self: end;
+    padding: 0;
+  }
+
+  .hero h1 {
+    font-size: clamp(4.8rem, 15vw, 7.5rem);
+  }
+
+  .hero-intro {
+    max-width: 330px;
+    font-size: 0.93rem;
+  }
+
+  .orb-scene {
+    position: absolute;
+    top: 100px;
+    right: -17%;
+    width: min(78vw, 430px);
+    opacity: 0.68;
+    transform: none;
+  }
+
+  .hero-copy {
+    margin-top: 200px;
+  }
+
+  .hero-bottom {
+    right: 28px;
+    left: 28px;
+  }
+
+  .hero-bottom span:last-child {
+    display: none;
+  }
+
+  .section-wrap {
+    width: calc(100% - 48px);
+  }
+
+  .about,
+  .skills,
+  .contact {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
+  .about {
+    min-height: auto;
+    padding-top: 75px;
+    padding-bottom: 90px;
+  }
+
+  .about h2,
+  .skills h2,
+  .contact h2 {
+    font-size: clamp(3.4rem, 12vw, 5rem);
+  }
+
+  .about-stamp {
+    right: 5px;
+    bottom: 25px;
+  }
+
+  .skills {
+    padding: 70px 0 85px;
+  }
+
+  .projects {
+    padding: 70px 0 85px;
+  }
+
+  .project-card {
+    grid-template-columns: 1fr;
+  }
+
+  .project-art {
+    min-height: 330px;
+  }
+
+  .project-info {
+    padding: 38px 28px 44px;
+  }
+
+  .project-info h2 {
+    font-size: clamp(4.5rem, 15vw, 6rem);
+  }
+
+  .contact {
+    min-height: 440px;
+    gap: 38px;
+    padding: 65px 0 80px;
+  }
+
+  .contact::before {
+    top: 35%;
+    right: -12%;
+    width: 240px;
+  }
+
+  .contact-spark {
+    top: 29%;
+    right: 19%;
+    font-size: 2.5rem;
+  }
+
+  .contact-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .site-footer {
+    min-height: 80px;
+    padding: 18px 24px;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-header {
+    align-items: flex-start;
+    height: auto;
+    padding-top: 18px;
+  }
+
+  .site-header nav {
+    max-width: 235px;
+    justify-content: flex-end;
+    gap: 10px 15px;
+  }
+
+  .hero {
+    min-height: 760px;
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .hero h1 {
+    font-size: clamp(4.2rem, 17vw, 5.4rem);
+  }
+
+  .hero-bottom {
+    right: 24px;
+    left: 24px;
+    font-size: 0.55rem;
+  }
+
+  .section-wrap {
+    width: calc(100% - 40px);
+  }
+
+  .site-footer {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .site-footer p {
+    order: 1;
+    width: 100%;
+  }
+}
+
+/* Reduce motion preferences are respected even if animations are added later. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
